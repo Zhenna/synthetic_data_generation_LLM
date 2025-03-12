@@ -169,3 +169,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+temp*.py 
+test*.py
+*.csv
+
+*:Zone.Identifier
+*:6E53BFF5-0001-412b-8407-E3AEDE763511
+*:PG$Secure
