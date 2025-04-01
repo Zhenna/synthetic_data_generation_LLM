@@ -1,58 +1,56 @@
 # %%
-import torch
 import pandas as pd
-from transformers import AutoModelForCausalLM, AutoTokenizer
+import random
+
+from data_profiler import profile_values
+from data_generator import generate_values_from_profile
 
 # %%
-# Load an open-source LLM from Hugging Face
-MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-# "mistralai/Mistral-7B-Instruct"  # Alternative: "facebook/opt-1.3b", "gpt2"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, torch_dtype=torch.float16, device_map="auto")
-
-# %%
-# Function to generate synthetic data using the model
-def generate_synthetic_data(prompt, max_length=100):
-    inputs = tokenizer(prompt, return_tensors="pt").to("cuda" if torch.cuda.is_available() else "cpu")
-    output_tokens = model.generate(**inputs, max_length=max_length, do_sample=True, temperature=0.7, top_p=0.9)
-    return tokenizer.decode(output_tokens[0], skip_special_tokens=True)
+# 1. analyze the csv file column by column, to understand its column type, range constraints, and patterns
 
 # %%
 # Load the CSV file
-input_file = "AIL-5-minute-data copy.csv"
+input_file = "synthetic_output.csv"
+# "AIL-5-minute-data copy.csv"
 # "AIL-5-minute-data.csv"
 # "friends/friends_table.csv"
 # "input_data.csv"  # Change to your input file
 df = pd.read_csv(input_file)
-
-# %%
 print(df)
 
-# %%
-# for col in df.columns:
-#     print(col)
-
-'''
-StartTime
-EndTime
-Actual Internal Load
-'''
-# %%
-# Generate synthetic rows
-synthetic_rows = []
-for _, row in df.iterrows():
-    prompt = f"First, analyze the dataset to understand its schema, constraints, and patterns."
-    # f"Generate a synthetic customer transaction record similar to:\nCustomer ID: {row['customer_id']}, Name: {row['name']}, Age: {row['age']}, Email: {row['email']}, Transaction: ${row['transaction_amount']} on {row['transaction_date']}."
-    synthetic_text = generate_synthetic_data(prompt)
-    synthetic_rows.append(synthetic_text)
 
 # %%
-# Convert synthetic data into DataFrame
-df_synthetic = pd.DataFrame({"synthetic_record": synthetic_rows})
 
-print(df_synthetic)
-# # Save the synthetic dataset
-# output_file = "synthetic_output.csv"
-# df_synthetic.to_csv(output_file, index=False)
+# create a dataframe with the same columns as the original dataframe
+synthetic_values = pd.DataFrame(columns=df.columns)
+# Loop through each column in the DataFrame
+# and generate synthetic values based on the profile
+# of the original values
 
-# print(f"✅ Synthetic data saved to {output_file}")
+for col in df.columns:
+
+    values = df[col].tolist()
+
+    # if length of values is larger than 1000, randomly sample 1000 values
+    if len(values) > 1000:
+        values = random.sample(values, 1000)
+    # show warning if length of value is less than 5
+    elif len(values) < 5:
+        print(f"Warning: {col} has less than 5 values. Sample size is too small.")
+
+
+    # Generate 5 synthetic values for each column
+    synthetic_values[col] = generate_values_from_profile(profile_values(df[col].tolist()), num_values=5)
+
+    # Call the function
+    profile_report = profile_values(values, description="") #This is a list of ages collected from a survey.")
+
+    # Print result
+    print(profile_report)
+
+    # Generate values
+    synthetic_values = generate_values_from_profile(profile_report)
+
+    # Print result
+    print("Synthetic Values:", synthetic_values)
+    print(type(synthetic_values))
