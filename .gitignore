@@ -178,4 +178,6 @@ data/*
 *:6E53BFF5-0001-412b-8407-E3AEDE763511
 *:PG$Secure
 *:Avecto.Zone.Identifier
+data/*.csv:Avecto.Zone.Identifier
 .vscode/
+data/friends_table.csv:Avecto.Zone.Identifier
