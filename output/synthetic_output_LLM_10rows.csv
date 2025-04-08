@@ -1,0 +1,11 @@
+index,name,age,guest_email,has_rewards,room_type,amenities_fee,checkin_date,checkout_date,room_rate,billing_address,credit_card_number
+102,Ethan Johnson,35,johndoe123@example.com,False,BASIC,0.0,12-Mar-20,7-Feb-20,94.23,"123 Elm St, Springfield, IL, 62704",567890123456789.0
+156,Ava Martinez,33,janedoe99@internet.net,False,BASIC,2.47,28-Apr-20,15-Mar-20,101.47,"PSC 476 Box 2234, FPO AP, 96522",1123456789012345.0
+198,Noah Kim,38,michael.smith@online.info,False,DELUXE,5.33,5-May-20,nan,110.52,"Unit 7400 Box 149, DPO AE, 09842",2234567890123456.0
+235,Sophia Garcia,29,sarah.connor@future.com,False,BASIC,8.21,19-Jun-20,22-May-20,121.34,"456 Maple Ave, Dover, DE, 19901",3345678901234567.0
+244,Liam Smith,44,david.johnson@techworld.com,False,BASIC,11.58,1-Jul-20,9-Jul-20,130.05,"USNS Mercy (T-AH-19), FPO AP, 96678",4456789012345678.0
+267,Olivia Davis,35,emily.clark@services.net,False,SUITE,14.76,23-Jul-20,11-Aug-20,138.78,"789 Oak St, Juneau, AK, 99801",5567890123456789.0
+289,Mason Wang,37,alex.brown@corporate.com,False,BASIC,17.85,8-Aug-20,3-Sep-20,145.66,"CMR 1250, APO AE, 09045",6678901234567890.0
+310,Isabella Brown,31,laura.adams@marketplace.info,False,BASIC,23.19,15-Aug-20,28-Oct-20,153.89,"852 Pine St, Salem, OR, 97301",7789012345678901.0
+398,James Wilson,42,robert.white@networks.net,False,DELUXE,29.04,2-Sep-20,17-Nov-20,169.03,"Unit 2500 Box 335, DPO AA, 34035",8890123456789012.0
+423,Charlotte Robinson,35,lisa.green@ecoplus.com,True,BASIC,36.98,10-Sep-20,29-Dec-20,178.45,"USNS Comfort (T-AH-20), FPO AE, 09578",9901234567890124.0
