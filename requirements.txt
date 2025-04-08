@@ -1,6 +1,3 @@
-# transformers
-# torch
 pandas
-# accelerate>=0.26.0
 openai
 python-dotenv
